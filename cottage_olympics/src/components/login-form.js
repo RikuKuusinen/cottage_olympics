@@ -1,16 +1,39 @@
+import { Button } from "@material-ui/core";
+import { TextField } from "material-ui";
 import React, { useState, useEffect } from "react";
 
-const LoginForm = ({ handleSubmit, handleUsernameChange, username }) => {
+const stylesFn = () => ({
+  input: {
+    color: "blue",
+  },
+  focused: {
+    background: "red",
+  },
+});
+
+const LoginForm = ({
+  handleSubmit,
+  handleUsernameChange,
+  username,
+  className,
+}) => {
   return (
     <div>
-      <h2>Kirjaudu</h2>
-
-      <form onSubmit={handleSubmit}>
-        <div>
-          username
-          <input value={username} onChange={handleUsernameChange} />
-        </div>
-        <button type="submit">Kirjaudu</button>
+      <form onSubmit={handleSubmit} noValidate autoComplete="off">
+        <TextField
+          className={className}
+          id="outlined-basic"
+          label="Käyttäjätunnus"
+          variant="outlined"
+          value={username}
+          onChange={handleUsernameChange}
+          inputStyle={{ color: "white" }}
+          floatingLabelText="Käyttäjätunnus"
+          floatingLabelStyle={{ color: "white" }}
+        />
+        <Button type="submit" variant="contained" color="primary">
+          Kirjaudu
+        </Button>
       </form>
     </div>
   );

@@ -37,7 +37,7 @@ const useStyles = makeStyles(() => ({
 
 export default function MenuAppBar({ user }) {
   console.log(user);
-  const username = user.username;
+  const username = user ? user.username : "";
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -77,7 +77,7 @@ export default function MenuAppBar({ user }) {
                 color="inherit"
               >
                 <AccountCircle></AccountCircle>
-                {user.username}
+                {username}
               </IconButton>
               <Menu
                 id="menu-appbar"

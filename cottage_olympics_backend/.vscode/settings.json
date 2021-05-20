@@ -1,0 +1,8 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/c9fa3f72-9990-4d4b-b085-f33d0936a5e4/resourceGroups/study/providers/Microsoft.Web/sites/almost30",
+    "appService.deploySubpath": ".",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ]
+}

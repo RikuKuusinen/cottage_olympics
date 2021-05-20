@@ -15,6 +15,7 @@ import LoginForm from "./components/login-form";
 import { createMuiTheme, makeStyles } from "@material-ui/core";
 import { ThemeProvider } from "styled-components";
 import { Paper } from "material-ui";
+import { MuiThemeProvider } from "material-ui/styles";
 
 const styles = {
   paperContainer: {
@@ -45,6 +46,10 @@ const useStyles = makeStyles({
     opacity: "0.8",
     borderRadius: 15,
   },
+  inputStyles: {
+    color: "white",
+    border: "6px white",
+  },
 });
 
 const App = () => {
@@ -73,42 +78,48 @@ const App = () => {
   };
   const loginForm = () => (
     <Container maxWidth="sm" style={styles.paperContainer} user={user}>
-      <LoginForm
-        username={username}
-        handleUsernameChange={({ target }) => setUsername(target.value)}
-        handleSubmit={handleLogin}
-      />
+      <MenuAppBar></MenuAppBar>
+      <Box my={4} className={classes.boxStyles}>
+        <LoginForm
+          className={classes.inputStyles}
+          username={username}
+          handleUsernameChange={({ target }) => setUsername(target.value)}
+          handleSubmit={handleLogin}
+        />
+      </Box>
     </Container>
   );
 
   return (
-    <Router>
-      <ThemeProvider theme={theme}>
-        {user === null ? (
-          loginForm()
-        ) : (
-          <Container maxWidth="sm" style={styles.paperContainer}>
-            <MenuAppBar user={user}></MenuAppBar>
-            <Box my={4} className={classes.boxStyles}>
-              {/* A <Switch> looks through its children <Route>s and
+    <MuiThemeProvider>
+      <Router>
+        <ThemeProvider theme={theme}>
+          {user === null ? (
+            loginForm()
+          ) : (
+            <Container maxWidth="sm" style={styles.paperContainer}>
+              <MenuAppBar user={user}></MenuAppBar>
+              <Box my={4} className={classes.boxStyles}>
+                {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-              <Switch>
-                <Route path="/statistics">
-                  <Statistics />
-                </Route>
-                <Route path="/pictures">
-                  <Pictures />
-                </Route>
-                <Route path="/">
-                  <Home />
-                </Route>
-              </Switch>
-            </Box>
-            <SimpleBottomNavigation></SimpleBottomNavigation>
-          </Container>
-        )}
-      </ThemeProvider>
-    </Router>
+                <Switch>
+                  <Route path="/statistics">
+                    <Statistics />
+                  </Route>
+                  <Route path="/pictures">
+                    <Pictures />
+                  </Route>
+                  <Route path="/">
+                    <Home />
+                  </Route>
+                </Switch>
+              </Box>
+              <SimpleBottomNavigation></SimpleBottomNavigation>
+            </Container>
+          )}
+        </ThemeProvider>
+      </Router>
+    </MuiThemeProvider>
   );
 };
 
