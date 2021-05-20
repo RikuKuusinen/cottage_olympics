@@ -5,14 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "build:ui": "rd /s /q build && cd ../cottage_olympics && npm run build --prod && dir && Xcopy /E /I \"build\" \"C:/code/cottage/cottage_olympics_backend/build\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "nodemon": "^2.0.7",
     "tedious": "^11.0.8"
   }
 }
