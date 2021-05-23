@@ -11,6 +11,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import SimpleMenu from "./simple-menu";
+import AppBarImage from "./app-bar-image";
 
 const theme = createMuiTheme({
   palette: {
@@ -29,9 +30,17 @@ const useStyles = makeStyles(() => ({
 
   title: {
     flexGrow: 1,
+    fontWeight: 600,
   },
   test: {
     background: "#1B065E !important",
+  },
+  menuapp: {
+    height: "10em",
+    width: "14em",
+    padding: 0,
+    marginTop: "-10px",
+    marginBottom: "-12px",
   },
 }));
 
@@ -64,8 +73,8 @@ export default function MenuAppBar({ user }) {
             color="inherit"
             aria-label="menu"
           ></IconButton>
-          <Typography variant="h6" className={classes.title}>
-            (3)0lympialaiset
+          <Typography variant="h5" className={classes.title}>
+            Mökkiolympialaiset
           </Typography>
           {auth && (
             <div>
@@ -94,8 +103,12 @@ export default function MenuAppBar({ user }) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem className={classes.menuapp} onClick={handleClose}>
+                  <AppBarImage
+                    username={username}
+                    className={classes.menuapp}
+                  ></AppBarImage>
+                </MenuItem>
               </Menu>
             </div>
           )}

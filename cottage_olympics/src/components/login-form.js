@@ -1,15 +1,6 @@
 import { Button } from "@material-ui/core";
 import { TextField } from "material-ui";
-import React, { useState, useEffect } from "react";
-
-const stylesFn = () => ({
-  input: {
-    color: "blue",
-  },
-  focused: {
-    background: "red",
-  },
-});
+import React from "react";
 
 const LoginForm = ({
   handleSubmit,
