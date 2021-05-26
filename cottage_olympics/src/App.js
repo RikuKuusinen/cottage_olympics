@@ -14,7 +14,6 @@ import SimpleBottomNavigation from "./components/Menu/simple-bottom-navigation";
 import LoginForm from "./components/login-form";
 import { createMuiTheme, makeStyles } from "@material-ui/core";
 import { ThemeProvider } from "styled-components";
-import { Paper } from "material-ui";
 import { MuiThemeProvider } from "material-ui/styles";
 
 const styles = {

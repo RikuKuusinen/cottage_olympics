@@ -30,6 +30,7 @@ function createRequest(query, connection) {
   var req = new Request(query, function (err, rowCount) {
     (err, rowCount) => {
       if (err) {
+        connection.end();
         console.error(err.message);
       } else {
         console.log(`${rowCount} row(s) returned`);
@@ -44,7 +45,7 @@ function stream(query, connection, output, defaultContent) {
   if (typeof query == "string") {
     request = createRequest(query, connection);
   }
-
+  console.log("tässä");
   var empty = true;
   request.on("row", function (columns) {
     if (columns) {
@@ -58,6 +59,8 @@ function stream(query, connection, output, defaultContent) {
     console.log(defaultContent);
     if (Array.isArray(defaultContent)) {
       defaultContent.push(val);
+    } else {
+      defaultContent = val;
     }
   });
 
@@ -102,6 +105,7 @@ function executeRequest(request, connection) {
     console.log("suoritetaan");
 
     connection.execSql(request);
+    console.log("suoritettu");
   });
 }
 

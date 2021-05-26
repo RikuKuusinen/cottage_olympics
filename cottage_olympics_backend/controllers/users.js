@@ -1,7 +1,6 @@
 const express = require("express");
 const TYPES = require("tedious").TYPES;
 const db = require("./db.js");
-const { Connection, Request } = require("tedious");
 
 var usersRouter = express.Router();
 
@@ -36,7 +35,7 @@ usersRouter.post("/", function (req, res) {
   request.addParameter("author", TYPES.NVarChar, req.body.author);
   request.addParameter("text", TYPES.NVarChar, req.body.text);
 
-  db.executeRequest(request, connection);
+  db.stream(request, conn, res, "{}");
 });
 
 module.exports = usersRouter;
