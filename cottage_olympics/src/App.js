@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Home from "./components/home";
+import Home from "./components/home/home";
 import Statistics from "./components/statistics";
 import Pictures from "./components/pictures";
 import Container from "@material-ui/core/Container";
@@ -20,9 +20,9 @@ const styles = {
   paperContainer: {
     backgroundImage: `url(${ballon})`,
     height: "100vh",
-    backgroundPosition: "center" /* Center the image */,
+    backgroundPosition: "-5rem 14rem" /* Center the image */,
     backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
+    backgroundColor: "#383838",
     color: "white",
     paddingLeft: 0,
     paddingRight: 0,
@@ -32,6 +32,9 @@ const styles = {
 const theme = createMuiTheme({
   palette: {
     primary: {
+      main: "#FFFF",
+    },
+    secondary: {
       main: "#FFFF",
     },
   },

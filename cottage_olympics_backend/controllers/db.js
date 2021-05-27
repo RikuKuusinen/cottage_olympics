@@ -45,7 +45,6 @@ function stream(query, connection, output, defaultContent) {
   if (typeof query == "string") {
     request = createRequest(query, connection);
   }
-  console.log("tässä");
   var empty = true;
   request.on("row", function (columns) {
     if (columns) {
@@ -55,8 +54,6 @@ function stream(query, connection, output, defaultContent) {
     columns.forEach(function (column) {
       val[column.metadata.colName] = column.value;
     });
-    console.log(val);
-    console.log(defaultContent);
     if (Array.isArray(defaultContent)) {
       defaultContent.push(val);
     } else {
@@ -65,14 +62,12 @@ function stream(query, connection, output, defaultContent) {
   });
 
   request.on("done", function (rowCount, more, rows) {
-    _OnDone(empty, defaultContent, output);
+    _OnDone(empty, defaultContent, output, connection);
   });
 
   request.on("doneProc", function (rowCount, more, rows) {
-    _OnDone(empty, defaultContent, output);
+    _OnDone(empty, defaultContent, output, connection);
   });
-
-  console.log("tässä");
 
   executeRequest(request, connection);
 }
@@ -94,7 +89,6 @@ function _OnDone(empty, defaultContent, output) {
 }
 
 function executeRequest(request, connection) {
-  console.log("tässä2");
   connection.connect();
 
   connection.on("connect", function (err) {

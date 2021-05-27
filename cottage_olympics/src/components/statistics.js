@@ -15,7 +15,7 @@ const Statistics = () => {
     <div>
       <h2>Tilastot</h2>
       {users.map((user, i) => (
-        <div>{user.UserName}</div>
+        <div key={i}>{user.UserName}</div>
       ))}
     </div>
   );

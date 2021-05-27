@@ -1,5 +1,10 @@
 import axios from "axios";
-const baseUrl = "api/users";
+let baseUrl = "api/users";
+const LOCAL_DOMAINS = ["localhost", "127.0.0.1"];
+
+if (LOCAL_DOMAINS.includes(window.location.hostname)) {
+  baseUrl = "http://localhost:3003/api/users";
+}
 
 const getAll = () => {
   const request = axios.get(baseUrl);

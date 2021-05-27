@@ -27,11 +27,29 @@ sportsRouter.get("/:id", function (req, res) {
 sportsRouter.post("/", function (req, res) {
   var connection = db.createConnection();
   var request = db.createRequest(
-    "insert into sport values (@sportName); SELECT SCOPE_IDENTITY() AS SportId",
+    "insert into sport values (@sportName, @sportDescription); SELECT SCOPE_IDENTITY() AS SportId",
     connection
   );
 
   request.addParameter("sportName", TYPES.NVarChar, req.body.sportName);
+  request.addParameter(
+    "sportDescription",
+    TYPES.NVarChar,
+    req.body.sportDescription
+  );
+  console.log(request);
+  db.stream(request, connection, res, "{}");
+});
+
+/* Delete sport. */
+sportsRouter.delete("/:id", function (req, res) {
+  var connection = db.createConnection();
+  var request = db.createRequest(
+    "Delete from Sport where SportId = @id",
+    connection
+  );
+  request.addParameter("id", TYPES.Int, req.params.id);
+
   console.log(request);
   db.stream(request, connection, res, "{}");
 });

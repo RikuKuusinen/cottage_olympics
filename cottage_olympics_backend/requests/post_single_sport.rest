@@ -2,5 +2,6 @@ POST http://localhost:3003/api/sports/
 content-type: application/json
 
 {
-  "sportName": "Koripallo"
+  "sportName": "Koripallo",
+  "sportDescription": "tätä pelataan kuivalla maalla"
 }
