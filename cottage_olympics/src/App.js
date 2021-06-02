@@ -19,13 +19,15 @@ import { MuiThemeProvider } from "material-ui/styles";
 const styles = {
   paperContainer: {
     backgroundImage: `url(${ballon})`,
-    height: "100vh",
+    height: "100%",
+    minHeight: "100vh",
     backgroundPosition: "-5rem 14rem" /* Center the image */,
-    backgroundRepeat: "no-repeat",
+    backgroundRepeat: "space",
     backgroundColor: "#383838",
     color: "white",
     paddingLeft: 0,
     paddingRight: 0,
+    paddingBottom: "80px",
   },
 };
 
