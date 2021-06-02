@@ -41,12 +41,22 @@ const useStyles = makeStyles(() => ({
     padding: 0,
     marginTop: "-10px",
     marginBottom: "-12px",
+    textOverflow: "ellipsis",
+  },
+  menuapp2: {
+    "& .MuiIconButton-label ": {
+      textOverflow: "ellipsis",
+      fontSize: "12px",
+      paddingLeft: "3px",
+    },
+    "& .MuiSvgIcon-root": {
+      paddingRight: "6px",
+    },
   },
 }));
 
 export default function MenuAppBar({ user }) {
-  console.log(user);
-  const username = user ? user.username : "";
+  const username = user ? user.UserName : "";
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -77,7 +87,7 @@ export default function MenuAppBar({ user }) {
             Mökkiolympialaiset
           </Typography>
           {auth && (
-            <div>
+            <div className={classes.menuapp2}>
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"

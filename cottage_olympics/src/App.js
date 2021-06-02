@@ -15,6 +15,7 @@ import LoginForm from "./components/login-form";
 import { createMuiTheme, makeStyles } from "@material-ui/core";
 import { ThemeProvider } from "styled-components";
 import { MuiThemeProvider } from "material-ui/styles";
+import users from "./services/users";
 
 const styles = {
   paperContainer: {
@@ -63,18 +64,33 @@ const App = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem("loggedCottageAppUser");
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
+    async function getOrCreateUser() {
+      const loggedUserJSON = window.localStorage.getItem(
+        "loggedCottageAppUser"
+      );
+      if (loggedUserJSON) {
+        const u = JSON.parse(loggedUserJSON);
+        console.log(u);
+        var result = await users.getUser(u.UserName);
+        console.log(result);
+        if (result) {
+          setUser(result);
+        } else {
+          window.localStorage.removeItem("loggedCottageAppUser");
+        }
+      }
     }
+    getOrCreateUser();
   }, []);
+
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const user = { username: username };
-      window.localStorage.setItem("loggedCottageAppUser", JSON.stringify(user));
-      setUser(user);
+      const user = { userName: username };
+      var asd = await users.createIfNeeded(user);
+      console.log(asd);
+      window.localStorage.setItem("loggedCottageAppUser", JSON.stringify(asd));
+      setUser(asd);
       setUsername("");
     } catch (exception) {
       console.log(exception);

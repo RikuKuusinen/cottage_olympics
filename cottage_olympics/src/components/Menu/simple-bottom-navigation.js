@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
-    width: "inherit",
+    width: "100%",
     maxWidth: "inherit",
     position: "fixed",
     bottom: 0,

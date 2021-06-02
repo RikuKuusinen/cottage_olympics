@@ -55,9 +55,12 @@ function stream(query, connection, output, defaultContent) {
       val[column.metadata.colName] = column.value;
     });
     if (Array.isArray(defaultContent)) {
+      console.log("ol iarray");
       defaultContent.push(val);
     } else {
+      console.log(defaultContent);
       defaultContent = val;
+      console.log(defaultContent);
     }
   });
 
@@ -75,16 +78,19 @@ function stream(query, connection, output, defaultContent) {
 function _OnDone(empty, defaultContent, output) {
   defaultContent = JSON.stringify(defaultContent);
   if (empty) {
+    console.log(defaultContent);
     output.write(defaultContent);
     console.log("No results from database - default content is returned.");
-  }
-  try {
-    output.write(defaultContent);
-
-    console.log("Closing Http Response output.");
     output.end();
-  } catch (err) {
-    console.error(err);
+  } else {
+    try {
+      output.write(defaultContent);
+
+      console.log("Closing Http Response output.");
+      output.end();
+    } catch (err) {
+      console.error(err);
+    }
   }
 }
 

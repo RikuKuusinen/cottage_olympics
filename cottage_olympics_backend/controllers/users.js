@@ -12,28 +12,41 @@ usersRouter.get("/", function (req, res) {
   db.stream(request, conn, res, []);
 });
 
-/* GET single comment. */
+/* GET usser by id. */
 usersRouter.get("/:id", function (req, res) {
   var conn = db.createConnection();
 
   var request = db.createRequest(
-    "select * from comments where id = @id for json path, without_array_wrapper",
+    "select * from [dbo].[User] where userId = @id for json path, without_array_wrapper",
     conn
   );
   request.addParameter("id", TYPES.Int, req.params.id);
   db.stream(request, conn, res, "{}");
 });
 
+/* GET user by user name. */
+usersRouter.get("/username/:username", function (req, res) {
+  var conn = db.createConnection();
+
+  var request = db.createRequest(
+    "select TOP 1 * from [dbo].[User] where username = @username",
+    conn
+  );
+  console.log(request);
+
+  request.addParameter("username", TYPES.NChar, req.params.username);
+  db.stream(request, conn, res, {});
+});
+
 /* POST create comment. */
 usersRouter.post("/", function (req, res) {
-  var connection = db.createConnection();
+  var conn = db.createConnection();
   var request = db.createRequest(
-    "insert into Comments values (@author, @text)",
-    connection
+    "insert into  [dbo].[User] values (@userName); SELECT SCOPE_IDENTITY() AS UserId",
+    conn
   );
 
-  request.addParameter("author", TYPES.NVarChar, req.body.author);
-  request.addParameter("text", TYPES.NVarChar, req.body.text);
+  request.addParameter("userName", TYPES.NVarChar, req.body.userName);
 
   db.stream(request, conn, res, "{}");
 });

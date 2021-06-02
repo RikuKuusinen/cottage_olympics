@@ -11,10 +11,39 @@ const getAll = () => {
   return request.then((response) => response.data);
 };
 
+const getUser = async (userName) => {
+  console.log(userName);
+  var url = baseUrl + "/username/" + userName;
+  console.log(url);
+  const response = await axios.get(url);
+  console.log(response);
+  if (response.data !== null && response.data.UserId) {
+    return response.data;
+  } else {
+    console.log("Ei löytyny käyttäjää");
+    return undefined;
+  }
+};
+
 const create = async (newObject) => {
   const response = await axios.post(baseUrl, newObject);
-  return response.data;
+  console.log("luotiinko käyttäjä" + response);
+  console.log(response);
+  var user = {
+    UserId: response.data.UserId,
+    UserName: newObject.userName,
+  };
+  return user;
+};
+
+const createIfNeeded = async (newObject) => {
+  var existingUser = await getUser(newObject.userName);
+  if (existingUser && existingUser.UserId) {
+    return existingUser;
+  } else {
+    return await create(newObject);
+  }
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAll, create };
+export default { getAll, create, getUser, createIfNeeded };
