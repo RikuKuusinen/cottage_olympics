@@ -1,5 +1,5 @@
 import axios from "axios";
-let baseUrl = "api/sports";
+let baseUrl = "api/scores";
 const LOCAL_DOMAINS = ["localhost", "127.0.0.1"];
 
 if (LOCAL_DOMAINS.includes(window.location.hostname)) {

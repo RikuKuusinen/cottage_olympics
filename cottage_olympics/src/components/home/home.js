@@ -14,6 +14,7 @@ import sportsService from "../../services/sportsService";
 import DeleteDialog from "./delete-dialog";
 import FloatingActionButtonSize from "../floating-button";
 import AddDialog from "./add-dialog";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,6 +59,7 @@ const Home = () => {
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
   const [openAdd, setOpenAdd] = useState(false);
+  const history = useHistory();
 
   const handleClose = async (remove) => {
     setOpen(false);
@@ -109,6 +111,12 @@ const Home = () => {
     setOpen(true);
   };
 
+  const navigateToSport = (i) => {
+    console.log(i);
+
+    history.push("/sport/" + i);
+  };
+
   const openAddModal = (event) => {
     setOpenAdd(true);
   };
@@ -123,6 +131,7 @@ const Home = () => {
                 <ListItem
                   key={sport.SportId}
                   className={classes.customListItem}
+                  onClick={() => navigateToSport(sport.SportId)}
                 >
                   <ListItemText
                     primary={sport.SportName}

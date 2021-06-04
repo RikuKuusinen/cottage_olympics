@@ -8,6 +8,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import AppBarImage from "./app-bar-image";
+import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -46,6 +48,7 @@ export default function MenuAppBar({ user }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const history = useHistory();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -53,6 +56,9 @@ export default function MenuAppBar({ user }) {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const back = () => {
+    history.goBack();
   };
   return (
     <div className={classes.root}>
@@ -63,7 +69,9 @@ export default function MenuAppBar({ user }) {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
-          ></IconButton>
+          >
+            <NavigateBeforeIcon onClick={back}></NavigateBeforeIcon>
+          </IconButton>
           <Typography variant="h5" className={classes.title}>
             Mökkiolympialaiset
           </Typography>

@@ -16,6 +16,7 @@ import { createMuiTheme, makeStyles } from "@material-ui/core";
 import { ThemeProvider } from "styled-components";
 import { MuiThemeProvider } from "material-ui/styles";
 import users from "./services/usersService";
+import SingleSport from "./components/single-sport/single-sport";
 
 const styles = {
   paperContainer: {
@@ -128,6 +129,9 @@ const App = () => {
                   </Route>
                   <Route path="/pictures">
                     <Pictures />
+                  </Route>
+                  <Route path="/sport/:id">
+                    <SingleSport />
                   </Route>
                   <Route path="/">
                     <Home />
