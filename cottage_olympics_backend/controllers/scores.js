@@ -7,7 +7,7 @@ var scoreRouter = express.Router();
 /* GET sports. */
 scoreRouter.get("/", function (req, res) {
   var conn = db.createConnection();
-  var request = db.createRequest("SELECT * FROM [dbo].[Scores]", conn);
+  var request = db.createRequest("SELECT * FROM [dbo].[Score]", conn);
   db.stream(request, conn, res, []);
 });
 

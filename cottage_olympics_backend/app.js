@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.static("build"));
 app.use("/api/users", usersRouter);
 app.use("/api/sports", sportsRouter);
-app.use("/api/score", scoreRouter);
+app.use("/api/scores", scoreRouter);
 
 app.get("*", function (req, res) {
   res.sendFile("index.html", {

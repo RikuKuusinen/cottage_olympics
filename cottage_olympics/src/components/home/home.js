@@ -10,7 +10,7 @@ import Typography from "material-ui/styles/typography";
 import React, { useState, useEffect } from "react";
 import FolderIcon from "@material-ui/icons/Folder";
 import DeleteIcon from "@material-ui/icons/Delete";
-import sportsService from "../../services/sports";
+import sportsService from "../../services/sportsService";
 import DeleteDialog from "./delete-dialog";
 import FloatingActionButtonSize from "../floating-button";
 import AddDialog from "./add-dialog";

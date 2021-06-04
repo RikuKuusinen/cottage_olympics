@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/home/home";
 import Statistics from "./components/statistics";
 import Pictures from "./components/pictures";
 import Container from "@material-ui/core/Container";
 
 import Box from "@material-ui/core/Box";
-import renkaat2 from "./images/renkaat2.jpg";
+//import renkaat2 from "./images/renkaat2.jpg";
 import ballon from "./images/30balloons.jpg";
 import MenuAppBar from "./components/Menu/menu-app-bar";
 import SimpleBottomNavigation from "./components/Menu/simple-bottom-navigation";
@@ -15,7 +15,7 @@ import LoginForm from "./components/login-form";
 import { createMuiTheme, makeStyles } from "@material-ui/core";
 import { ThemeProvider } from "styled-components";
 import { MuiThemeProvider } from "material-ui/styles";
-import users from "./services/users";
+import users from "./services/usersService";
 
 const styles = {
   paperContainer: {

@@ -27,3 +27,4 @@ pisteidenlasku functio
 list users
 list toi haku
 for i x i asdad
+tähän se if myöskin jos edellinen sama tulos
