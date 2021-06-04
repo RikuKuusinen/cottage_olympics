@@ -10,7 +10,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import _, { iteratee } from "lodash";
+import _, { indexOf, iteratee } from "lodash";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -85,8 +85,6 @@ const Statistics = () => {
   function calculatePoints(asd, loadedUsers) {
     var groupedSports = _.groupBy(asd, "SportId");
     var first = _.values(groupedSports);
-    console.log(groupedSports);
-    console.log(first);
     for (let index = 0; index < first.length; index++) {
       const element = first[index];
       calculateSportPoints(element, loadedUsers);
@@ -126,33 +124,18 @@ const Statistics = () => {
             break;
         }
         const userId = topToBottom[index].UserId;
-        console.log(index);
-        console.log(topToBottom);
-        console.log("käyttäjätunnusa", userId);
         addPointsToUser(userId, pointsForSport, loadedUsers);
       }
     }
 
     function addPointsToUser(userId, pointsForSport, loadedUsers) {
-      console.log(loadedUsers);
       var user = loadedUsers.find((a) => a.UserId === userId);
-      console.log(user);
-      console.log(pointsForSport);
       if (user) {
         user.totalPoints = user.totalPoints
           ? user.totalPoints + pointsForSport
           : pointsForSport;
       }
     }
-
-    // const groupedSports = groupBy(scores, (score) => score.ScoreId);
-    //console.log(groupedSports.get(2)); // -> [{type:"Dog", name:"Spot"}, {type:"Dog", name:"Rover"}]
-
-    // groupedSports.forEach((element) => {
-    //   console.log(element);
-    //   var topToBottom = element.sort((a, b) => a - b);
-    //   console.log(topToBottom);
-    // });
   }
 
   return (
@@ -161,6 +144,7 @@ const Statistics = () => {
         <TableHead>
           <TableRow>
             <StyledTableCell>Atleetikko</StyledTableCell>
+            <StyledTableCell align="right">Sijoitus</StyledTableCell>
             <StyledTableCell align="right">Pisteet</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -169,6 +153,9 @@ const Statistics = () => {
             <StyledTableRow key={user.UserId}>
               <StyledTableCell component="th" scope="row">
                 {user.UserName}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                {users.indexOf(user) + 1}
               </StyledTableCell>
               <StyledTableCell align="right">
                 {user.totalPoints}
