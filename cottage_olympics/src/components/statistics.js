@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import scoreService from "../services/scoreService";
-import sportsService from "../services/sportsService";
 import userService from "../services/usersService";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -47,8 +46,6 @@ const useStyles = makeStyles({
 
 const Statistics = () => {
   const [users, setUsers] = useState([]);
-  const [scores, setScores] = useState([]);
-  const [sports, setSports] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
@@ -56,30 +53,13 @@ const Statistics = () => {
   }, []);
 
   async function getEverything() {
-    var promises = [];
-    // var p1 = async () => {
-    //   var users = await userService.getAll();
-    //   setUsers(users);
-    // };
-    var p2 = async () => {
-      var loadedUsers = await userService.getAll();
-
-      var asd = await scoreService.getAll();
-      var newScores = calculatePoints(asd, loadedUsers);
-      var orderedUsers = loadedUsers.sort(
-        (a, b) => b.totalPoints - a.totalPoints
-      );
-
-      setScores(asd);
-      setUsers(orderedUsers);
-    };
-
-    var p3 = async () => {
-      var sports = await sportsService.getAll();
-      setSports(sports);
-    };
-    promises.push(p2(), p3());
-    await Promise.all(promises);
+    var loadedUsers = await userService.getAll();
+    var asd = await scoreService.getAll();
+    var newScores = calculatePoints(asd, loadedUsers);
+    var orderedUsers = loadedUsers.sort(
+      (a, b) => b.totalPoints - a.totalPoints
+    );
+    setUsers(orderedUsers);
   }
 
   function calculatePoints(asd, loadedUsers) {
@@ -89,52 +69,52 @@ const Statistics = () => {
       const element = first[index];
       calculateSportPoints(element, loadedUsers);
     }
+  }
 
-    function calculateSportPoints(sportScores, loadedUsers) {
-      var topToBottom = sportScores.sort((a, b) => a - b);
-      for (let index = 0; index < topToBottom.length; index++) {
-        var pointsForSport = 0;
-        switch (index) {
-          case 0:
-            pointsForSport = 10;
-            break;
-          case 1:
-            pointsForSport = 8;
-            break;
-          case 3:
-            pointsForSport = 6;
-            break;
-          case 4:
-            pointsForSport = 5;
-            break;
-          case 5:
-            pointsForSport = 4;
-            break;
-          case 6:
-            pointsForSport = 3;
-            break;
-          case 7:
-            pointsForSport = 2;
-            break;
-          case 8:
-            pointsForSport = 1;
-            break;
-          default:
-            pointsForSport = 0;
-            break;
-        }
-        const userId = topToBottom[index].UserId;
-        addPointsToUser(userId, pointsForSport, loadedUsers);
+  function calculateSportPoints(sportScores, loadedUsers) {
+    var topToBottom = sportScores.sort((a, b) => a - b);
+    for (let index = 0; index < topToBottom.length; index++) {
+      var pointsForSport = 0;
+      switch (index) {
+        case 0:
+          pointsForSport = 10;
+          break;
+        case 1:
+          pointsForSport = 8;
+          break;
+        case 3:
+          pointsForSport = 6;
+          break;
+        case 4:
+          pointsForSport = 5;
+          break;
+        case 5:
+          pointsForSport = 4;
+          break;
+        case 6:
+          pointsForSport = 3;
+          break;
+        case 7:
+          pointsForSport = 2;
+          break;
+        case 8:
+          pointsForSport = 1;
+          break;
+        default:
+          pointsForSport = 0;
+          break;
       }
+      const userId = topToBottom[index].UserId;
+      addPointsToUser(userId, pointsForSport, loadedUsers);
     }
+  }
 
-    function addPointsToUser(userId, pointsForSport, loadedUsers) {
-      var user = loadedUsers.find((a) => a.UserId === userId);
-      if (user) {
-        user.totalPoints = user.totalPoints
-          ? user.totalPoints + pointsForSport
-          : pointsForSport;
-      }
+  function addPointsToUser(userId, pointsForSport, loadedUsers) {
+    var user = loadedUsers.find((a) => a.UserId === userId);
+    if (user) {
+      user.totalPoints = user.totalPoints
+        ? user.totalPoints + pointsForSport
+        : pointsForSport;
     }
   }
 
