@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./components/home/home";
+import SportsList from "./components/sports-list/sports-list";
 import Statistics from "./components/statistics";
 import Pictures from "./components/pictures";
 import Container from "@material-ui/core/Container";
@@ -134,7 +134,7 @@ const App = () => {
                     <SingleSport />
                   </Route>
                   <Route path="/">
-                    <Home />
+                    <SportsList />
                   </Route>
                 </Switch>
               </Box>

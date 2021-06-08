@@ -16,7 +16,7 @@ sportsRouter.get("/:id", function (req, res) {
   var conn = db.createConnection();
 
   var request = db.createRequest(
-    "select * from sport where sportId = @id for json path, without_array_wrapper",
+    "select * from sport where sportId = @id",
     conn
   );
   request.addParameter("id", TYPES.Int, req.params.id);

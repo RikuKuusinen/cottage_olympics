@@ -11,6 +11,13 @@ const getAll = () => {
   return request.then((response) => response.data);
 };
 
+const getSingle = (id) => {
+  var url = baseUrl + "/" + id;
+
+  const request = axios.get(url);
+  return request.then((response) => response.data);
+};
+
 const create = async (newObject) => {
   const response = await axios.post(baseUrl, newObject);
   return response.data;
@@ -22,4 +29,4 @@ const deleteSport = async (id) => {
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAll, create, deleteSport };
+export default { getAll, create, deleteSport, getSingle };

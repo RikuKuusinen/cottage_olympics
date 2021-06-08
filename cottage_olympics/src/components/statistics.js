@@ -50,12 +50,12 @@ const Statistics = () => {
 
   useEffect(() => {
     getEverything();
-  }, []);
+  });
 
   async function getEverything() {
     var loadedUsers = await userService.getAll();
     var asd = await scoreService.getAll();
-    var newScores = calculatePoints(asd, loadedUsers);
+    calculatePoints(asd, loadedUsers);
     var orderedUsers = loadedUsers.sort(
       (a, b) => b.totalPoints - a.totalPoints
     );

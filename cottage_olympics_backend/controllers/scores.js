@@ -11,6 +11,18 @@ scoreRouter.get("/", function (req, res) {
   db.stream(request, conn, res, []);
 });
 
+/* GET scores by sport id and include user. */
+scoreRouter.get("/sport/:id", function (req, res) {
+  var conn = db.createConnection();
+
+  var request = db.createRequest(
+    "SELECt* from score inner join dbo.[User] on [dbo].[User].UserId = score.UserId where sportId = @id",
+    conn
+  );
+  request.addParameter("id", TYPES.Int, req.params.id);
+  db.stream(request, conn, res, []);
+});
+
 /* GET single sport. */
 scoreRouter.get("/:id", function (req, res) {
   var conn = db.createConnection();

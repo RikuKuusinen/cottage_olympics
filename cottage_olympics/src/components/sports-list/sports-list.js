@@ -1,14 +1,11 @@
 import {
   Grid,
-  ListItemAvatar,
   ListItemSecondaryAction,
   ListItemText,
   makeStyles,
 } from "@material-ui/core";
-import { Avatar, IconButton, List, ListItem } from "material-ui";
-import Typography from "material-ui/styles/typography";
+import { IconButton, List, ListItem } from "material-ui";
 import React, { useState, useEffect } from "react";
-import FolderIcon from "@material-ui/icons/Folder";
 import DeleteIcon from "@material-ui/icons/Delete";
 import sportsService from "../../services/sportsService";
 import DeleteDialog from "./delete-dialog";
@@ -50,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Home = () => {
+const SportsList = () => {
   const classes = useStyles();
 
   const [sports, setSports] = useState([]);
@@ -169,4 +166,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default SportsList;
