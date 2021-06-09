@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
-import NavigationIcon from "@material-ui/icons/Navigation";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -10,12 +10,21 @@ const useStyles = makeStyles((theme) => ({
   extendedIcon: {
     marginRight: theme.spacing(1),
   },
+  root: {
+    height: 80,
+    position: "fixed",
+    bottom: 40,
+    right: 10,
+    backdropFilter: "blur(1px)",
+    width: "100%",
+    textAlign: "right",
+  },
 }));
 
 const FloatingActionButtonSize = ({ action, buttonText }) => {
   const classes = useStyles();
   return (
-    <div>
+    <div className={classes.root}>
       <div onClick={action}>
         <Fab
           variant="extended"
@@ -23,7 +32,7 @@ const FloatingActionButtonSize = ({ action, buttonText }) => {
           aria-label="add"
           className={classes.margin}
         >
-          <NavigationIcon className={classes.extendedIcon} />
+          <AddCircleIcon className={classes.extendedIcon} />
           {buttonText}
         </Fab>
       </div>

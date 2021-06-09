@@ -29,7 +29,7 @@ const styles = {
     color: "white",
     paddingLeft: 0,
     paddingRight: 0,
-    paddingBottom: "80px",
+    paddingBottom: 100,
   },
 };
 
@@ -131,7 +131,7 @@ const App = () => {
                     <Pictures />
                   </Route>
                   <Route path="/sport/:id">
-                    <SingleSport />
+                    <SingleSport user={user} />
                   </Route>
                   <Route path="/">
                     <SportsList />

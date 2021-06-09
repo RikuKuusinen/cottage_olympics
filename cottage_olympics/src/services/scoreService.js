@@ -18,7 +18,7 @@ const getScoresBySportId = (id) => {
   return request.then((response) => response.data);
 };
 
-const create = async (newObject) => {
+const upsert = async (newObject) => {
   const response = await axios.post(baseUrl, newObject);
   return response.data;
 };
@@ -29,4 +29,4 @@ const deleteScore = async (id) => {
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAll, create, deleteScore, getScoresBySportId };
+export default { getAll, upsert, deleteScore, getScoresBySportId };

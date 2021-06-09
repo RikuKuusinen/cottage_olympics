@@ -1,0 +1,8 @@
+POST http://localhost:3003/api/scores/
+content-type: application/json
+
+{
+  "sportId": 22,
+  "userId": 1,
+  "totalScore": 999
+}

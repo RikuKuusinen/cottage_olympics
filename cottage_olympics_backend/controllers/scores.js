@@ -4,7 +4,7 @@ const db = require("./db.js");
 
 var scoreRouter = express.Router();
 
-/* GET sports. */
+/* GET scores. */
 scoreRouter.get("/", function (req, res) {
   var conn = db.createConnection();
   var request = db.createRequest("SELECT * FROM [dbo].[Score]", conn);
@@ -16,7 +16,7 @@ scoreRouter.get("/sport/:id", function (req, res) {
   var conn = db.createConnection();
 
   var request = db.createRequest(
-    "SELECt* from score inner join dbo.[User] on [dbo].[User].UserId = score.UserId where sportId = @id",
+    "SELECt * from score inner join dbo.[User] on [dbo].[User].UserId = score.UserId where sportId = @id",
     conn
   );
   request.addParameter("id", TYPES.Int, req.params.id);
@@ -35,22 +35,37 @@ scoreRouter.get("/:id", function (req, res) {
   db.stream(request, conn, res, "{}");
 });
 
-/* POST sport. */
+/* POST score. */
 scoreRouter.post("/", function (req, res) {
+  console.log(req.body);
   var connection = db.createConnection();
-  var request = db.createRequest(
-    "insert into sport values (@sportName, @sportDescription); SELECT SCOPE_IDENTITY() AS SportId",
-    connection
-  );
 
-  request.addParameter("sportName", TYPES.NVarChar, req.body.sportName);
-  request.addParameter(
-    "sportDescription",
-    TYPES.NVarChar,
-    req.body.sportDescription
-  );
-  console.log(request);
-  db.stream(request, connection, res, "{}");
+  if (req.body.scoreId > 0) {
+    request = db.createRequest(
+      "Update [dbo].[Score] SET TotalScore = @totalScore where scoreId = @scoreId; SELECT @scoreId as ScoreId",
+      connection
+    );
+    request.addParameter("scoreId", TYPES.Numeric, req.body.scoreId);
+
+    request.addParameter("totalScore", TYPES.Numeric, req.body.totalScore);
+
+    console.log(request.params);
+    db.stream(request, connection, res, {});
+  } else {
+    request = db.createRequest(
+      "insert into [dbo].[Score] (TotalScore, SportId, UserId)  values (@totalScore, @sportId, @userId); SELECT SCOPE_IDENTITY() AS ScoreId",
+      connection
+    );
+
+    console.log("sportIDDDDDDDDD", req.body.sportId);
+    console.log("sportIDDDDDDDDD", req.body.sportId);
+    request.addParameter("totalScore", TYPES.Decimal, req.body.totalScore);
+    request.addParameter("sportId", TYPES.Numeric, req.body.sportId);
+    request.addParameter("userId", TYPES.Numeric, req.body.userId);
+
+    console.log(request.params);
+    db.stream(request, connection, res, {});
+  }
 });
 
 /* Delete sport. */

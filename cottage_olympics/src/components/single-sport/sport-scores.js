@@ -44,7 +44,7 @@ const useStyles = makeStyles({
 const SportScores = (props) => {
   const classes = useStyles();
   console.log(props);
-  let { scores } = props;
+  let { scores, sport } = props;
   console.log("pisteet", scores);
 
   return (
@@ -52,9 +52,11 @@ const SportScores = (props) => {
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Sijoitukset</StyledTableCell>
+            <StyledTableCell>Atleetti</StyledTableCell>
             <StyledTableCell align="right">Sijoitus</StyledTableCell>
-            <StyledTableCell align="right">Tulos ({})</StyledTableCell>
+            <StyledTableCell align="right">
+              Tulos ({sport.UnitShort})
+            </StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

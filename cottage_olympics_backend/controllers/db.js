@@ -29,6 +29,7 @@ function createConnection() {
 function createRequest(query, connection) {
   var req = new Request(query, function (err, rowCount) {
     (err, rowCount) => {
+      console.log(err);
       if (err) {
         connection.end();
         console.error(err.message);
@@ -46,6 +47,7 @@ function stream(query, connection, output, defaultContent) {
     request = createRequest(query, connection);
   }
   var empty = true;
+  console.log(request);
   request.on("row", function (columns) {
     if (columns) {
       empty = false;
