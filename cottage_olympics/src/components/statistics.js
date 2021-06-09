@@ -50,6 +50,7 @@ const Statistics = () => {
 
   useEffect(() => {
     getEverything();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function getEverything() {

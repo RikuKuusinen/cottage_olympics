@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SportsList from "./components/sports-list/sports-list";
 import Statistics from "./components/statistics";
-import Pictures from "./components/pictures";
+import Pictures from "./components/pictures/pictures";
 import Container from "@material-ui/core/Container";
 
 import Box from "@material-ui/core/Box";
