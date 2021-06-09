@@ -37,28 +37,43 @@ const SingleSport = (props) => {
     if (submit) {
       var existingScore = scores.find((s) => s.UserId === user.UserId);
 
-      var upsertedScore = {};
+      var upsertObject = {};
       if (existingScore) {
-        upsertedScore.scoreId = existingScore.scoreId;
-        upsertedScore.totalScore = existingScore.score;
+        var updatedScore = {
+          scoreId: existingScore.ScoreId,
+          totalScore: score,
+        };
+
+        upsertObject = updatedScore;
       } else {
         var newScore = {
           sportId: sport.SportId,
           totalScore: score,
           userId: user.UserId,
         };
-        upsertedScore = newScore;
+        upsertObject = newScore;
       }
 
-      var added = await scoreService.upsert(upsertedScore);
+      var added = await scoreService.upsert(upsertObject);
       console.log(added);
-      upsertedScore.ScoreId = added.ScoreId;
-      upsertedScore.UserId = user.UserId;
-      upsertedScore.UserName = user.UserName;
-      upsertedScore.TotalScore = added.totalScore;
+      var newListOfScores = [...scores];
+      if (existingScore) {
+        var upds = newListOfScores.find(
+          (a) => a.ScoreId === existingScore.ScoreId
+        );
+        upds.TotalScore = score;
+      } else {
+        var upsertedScore = {
+          ScoreId: added.ScoreId,
+          UserId: user.UserId,
+          UserName: user.UserName,
+          TotalScore: score,
+        };
 
-      var newScores = [...scores, upsertedScore];
-      var res = newScores.sort((a, b) => {
+        newListOfScores = [...scores, upsertedScore];
+      }
+
+      var res = newListOfScores.sort((a, b) => {
         return b.TotalScore - a.TotalScore;
       });
       setScores(res);

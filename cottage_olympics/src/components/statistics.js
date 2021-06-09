@@ -50,15 +50,17 @@ const Statistics = () => {
 
   useEffect(() => {
     getEverything();
-  });
+  }, []);
 
   async function getEverything() {
     var loadedUsers = await userService.getAll();
     var asd = await scoreService.getAll();
     calculatePoints(asd, loadedUsers);
-    var orderedUsers = loadedUsers.sort(
-      (a, b) => b.totalPoints - a.totalPoints
+    var orderedUsers = loadedUsers.sort((a, b) =>
+      a.totalPoints ? a.totalPoints - b.totalPoints : -1
     );
+    orderedUsers = orderedUsers.reverse();
+    console.log(orderedUsers);
     setUsers(orderedUsers);
   }
 

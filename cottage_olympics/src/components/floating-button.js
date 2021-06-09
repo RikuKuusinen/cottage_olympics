@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: 40,
     right: 10,
     backdropFilter: "blur(1px)",
+    WebkitBackdropFilter: "blur(1px)",
     width: "100%",
     textAlign: "right",
   },
