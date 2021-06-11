@@ -57,12 +57,14 @@ const Statistics = () => {
     var loadedUsers = await userService.getAll();
     var asd = await scoreService.getAll();
     calculatePoints(asd, loadedUsers);
-    var orderedUsers = loadedUsers.sort((a, b) =>
-      a.totalPoints ? a.totalPoints - b.totalPoints : -1
-    );
-    orderedUsers = orderedUsers.reverse();
-    console.log(orderedUsers);
-    setUsers(orderedUsers);
+    if (loadedUsers && loadedUsers.length > 0) {
+      var orderedUsers = loadedUsers.sort((a, b) =>
+        a.totalPoints ? a.totalPoints - b.totalPoints : -1
+      );
+      orderedUsers = orderedUsers.reverse();
+      console.log(orderedUsers);
+      setUsers(orderedUsers);
+    }
   }
 
   function calculatePoints(asd, loadedUsers) {

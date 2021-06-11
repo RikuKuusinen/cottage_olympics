@@ -34,11 +34,13 @@ const AddPicture = ({
   const [image, setImage] = useState({});
   const classes = useStyles();
 
-  function upload() {
+  function upload(file) {
+    console.log(file);
     console.log("lol");
   }
   handleChange = (event) => {
     setImage(URL.createObjectURL(event.target.files[0]));
+    upload(event.target.files[0]);
   };
   return (
     <div>
