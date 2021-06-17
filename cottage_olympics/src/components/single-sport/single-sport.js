@@ -1,4 +1,5 @@
 import { Box } from "@material-ui/core";
+import { ContactSupportOutlined } from "@material-ui/icons";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import scoreService from "../../services/scoreService";
@@ -36,7 +37,7 @@ const SingleSport = (props) => {
     setOpenAdd(false);
     if (submit) {
       var existingScore = scores.find((s) => s.UserId === user.UserId);
-
+      console.log(existingScore);
       var upsertObject = {};
       if (existingScore) {
         var updatedScore = {
@@ -54,6 +55,7 @@ const SingleSport = (props) => {
         upsertObject = newScore;
       }
 
+      console.log(upsertObject);
       var added = await scoreService.upsert(upsertObject);
       console.log(added);
       var newListOfScores = [...scores];
