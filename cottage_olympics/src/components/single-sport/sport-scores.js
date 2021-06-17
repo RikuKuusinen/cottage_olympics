@@ -61,7 +61,7 @@ const SportScores = (props) => {
         </TableHead>
         <TableBody>
           {scores.map((score) => (
-            <StyledTableRow key={score.UserId}>
+            <StyledTableRow key={score.ScoreId}>
               <StyledTableCell component="th" scope="row">
                 {score.UserName}
               </StyledTableCell>

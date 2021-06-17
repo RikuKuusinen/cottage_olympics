@@ -37,9 +37,11 @@ const Pictures = () => {
     });
   }, []);
 
-  function upload(file) {
+  async function upload(file) {
     console.log(file);
-    imageService.create(file);
+    var result = await imageService.create(file);
+    console.log(result);
+    setGallery([result[0], ...gallery]);
   }
   const handleChange = (event) => {
     setImage(URL.createObjectURL(event.target.files[0]));
@@ -80,12 +82,6 @@ const Pictures = () => {
         buttonText={"Uusi kuva"}
         action={handleClick}
       ></FloatingActionButtonSize>
-      {/* <AddPicture
-        openAdd={openAdd}
-        handleSubmit={handleSubmit}
-        handleChange={({ target }) => setPicture(target.value)}
-        picture={picture}
-      ></AddPicture> */}
     </div>
   );
 };
