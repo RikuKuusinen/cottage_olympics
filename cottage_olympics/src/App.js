@@ -8,7 +8,7 @@ import Container from "@material-ui/core/Container";
 
 import Box from "@material-ui/core/Box";
 //import renkaat2 from "./images/renkaat2.jpg";
-import ballon from "./images/30balloons.jpg";
+import ballon from "./images/30balloons2.png";
 import MenuAppBar from "./components/Menu/menu-app-bar";
 import SimpleBottomNavigation from "./components/Menu/simple-bottom-navigation";
 import LoginForm from "./components/login-form";
@@ -21,10 +21,12 @@ import SingleSport from "./components/single-sport/single-sport";
 const styles = {
   paperContainer: {
     backgroundImage: `url(${ballon})`,
+
     height: "100%",
     minHeight: "100vh",
     backgroundPosition: "-5rem 14rem" /* Center the image */,
     backgroundRepeat: "space",
+    //backgroundColor: "#383838",
     backgroundColor: "#383838",
     color: "white",
     paddingLeft: 0,
@@ -49,7 +51,7 @@ const useStyles = makeStyles({
     backgroundColor: "#1b065e",
     padding: "1rem",
     margin: "1rem",
-    opacity: "0.8",
+    //opacity: "0.8",
     borderRadius: 15,
   },
   inputStyles: {

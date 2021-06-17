@@ -6,6 +6,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import CameraAltIcon from "@material-ui/icons/CameraAlt";
 import { makeStyles } from "@material-ui/core";
+import imageService from "../../services/imageService";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -37,6 +38,7 @@ const AddPicture = ({
   function upload(file) {
     console.log(file);
     console.log("lol");
+    imageService.create(file);
   }
   handleChange = (event) => {
     setImage(URL.createObjectURL(event.target.files[0]));
