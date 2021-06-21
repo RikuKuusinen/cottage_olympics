@@ -4,6 +4,14 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import FloatingActionButtonSize from "../floating-button";
 import imageService from "../../services/imageService";
+import {
+  AdvancedImage,
+  lazyload,
+  accessibility,
+  responsive,
+  placeholder,
+} from "@cloudinary/react";
+import { Cloudinary } from "@cloudinary/base";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   gridList: {
     width: "100%",
     height: "100%",
+  },
+  tile: {
+    height: "100% !important",
   },
 }));
 
@@ -49,6 +60,11 @@ const Pictures = () => {
   const openAddPicture = (event) => {
     setOpenAdd(true);
   };
+  const myCld = new Cloudinary({
+    cloud: {
+      cloudName: "dfwycqmju",
+    },
+  });
 
   const handleClick = () => {
     myInput.click();
@@ -63,10 +79,18 @@ const Pictures = () => {
         style={{ display: "none" }}
         onChange={handleChange}
       />
-      <GridList cellHeight={250} className={classes.gridList} cols={3}>
+      <GridList className={classes.gridList} cols={3}>
         {gallery.map((image) => (
-          <GridListTile key={image.asset_id} cols={image.cols || 3}>
-            <img src={image.url} alt={image.title} />
+          <GridListTile
+            className={classes.tile}
+            key={image.asset_id}
+            cols={image.cols || 3}
+            height={image.height}
+          >
+            <AdvancedImage
+              cldImg={myCld.image(image.public_id)}
+              plugins={[lazyload(), responsive()]}
+            />
           </GridListTile>
         ))}
       </GridList>

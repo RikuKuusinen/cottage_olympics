@@ -10,7 +10,10 @@ const getAll = () => {
   const request = axios.get(baseUrl);
   return request.then((response) => response.data);
 };
-
+const get3Random = () => {
+  const request = axios.get(baseUrl + "/random");
+  return request.then((response) => response.data);
+};
 const getSingle = (id) => {
   var url = baseUrl + "/" + id;
 
@@ -19,7 +22,6 @@ const getSingle = (id) => {
 };
 
 const create = async (newObject) => {
-  var file = newObject;
   //   let binary = await getBinaryFromFile(file);
   let formData = new FormData();
   formData.append("file", newObject);
@@ -34,17 +36,6 @@ const create = async (newObject) => {
   return response.data;
 };
 
-function getBinaryFromFile(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-
-    reader.addEventListener("load", () => resolve(reader.result));
-    reader.addEventListener("error", (err) => reject(err));
-
-    reader.readAsBinaryString(file);
-  });
-}
-
 // Usage
 
 const deleteImage = async (id) => {
@@ -53,4 +44,10 @@ const deleteImage = async (id) => {
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAll, create, deleteSport: deleteImage, getSingle };
+export default {
+  getAll,
+  create,
+  deleteImage,
+  getSingle,
+  get3Random,
+};
