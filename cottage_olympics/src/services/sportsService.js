@@ -1,5 +1,5 @@
 import axios from "axios";
-let baseUrl = "api/sports";
+let baseUrl = "https://cottage30.azurewebsites.net/api/sports";
 const LOCAL_DOMAINS = ["localhost", "127.0.0.1"];
 
 if (LOCAL_DOMAINS.includes(window.location.hostname)) {
@@ -11,11 +11,11 @@ const getAll = () => {
   return request.then((response) => response.data);
 };
 
-const getSingle = (id) => {
+const getSingle = async (id) => {
   var url = baseUrl + "/" + id;
 
-  const request = axios.get(url);
-  return request.then((response) => response.data);
+  const response = await axios.get(url);
+  return response.data;
 };
 
 const create = async (newObject) => {

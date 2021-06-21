@@ -55,8 +55,8 @@ const Statistics = () => {
 
   async function getEverything() {
     var loadedUsers = await userService.getAll();
-    var asd = await scoreService.getAll();
-    calculatePoints(asd, loadedUsers);
+    var loadedScores = await scoreService.getAll();
+    calculatePoints(loadedScores, loadedUsers);
     if (loadedUsers && loadedUsers.length > 0) {
       var orderedUsers = loadedUsers.sort((a, b) =>
         a.totalPoints ? a.totalPoints - b.totalPoints : -1
@@ -67,8 +67,8 @@ const Statistics = () => {
     }
   }
 
-  function calculatePoints(asd, loadedUsers) {
-    var groupedSports = _.groupBy(asd, "SportId");
+  function calculatePoints(loadedScores, loadedUsers) {
+    var groupedSports = _.groupBy(loadedScores, "SportId");
     var first = _.values(groupedSports);
     for (let index = 0; index < first.length; index++) {
       const element = first[index];
@@ -77,7 +77,11 @@ const Statistics = () => {
   }
 
   function calculateSportPoints(sportScores, loadedUsers) {
-    var topToBottom = sportScores.sort((a, b) => a - b);
+    console.log("tulokset", sportScores);
+    var topToBottom = sportScores.sort((a, b) => {
+      console.log(a);
+      return b.TotalScore - a.TotalScore;
+    });
     for (let index = 0; index < topToBottom.length; index++) {
       var pointsForSport = 0;
       switch (index) {
@@ -87,22 +91,22 @@ const Statistics = () => {
         case 1:
           pointsForSport = 8;
           break;
-        case 3:
+        case 2:
           pointsForSport = 6;
           break;
-        case 4:
+        case 3:
           pointsForSport = 5;
           break;
-        case 5:
+        case 4:
           pointsForSport = 4;
           break;
-        case 6:
+        case 5:
           pointsForSport = 3;
           break;
-        case 7:
+        case 6:
           pointsForSport = 2;
           break;
-        case 8:
+        case 7:
           pointsForSport = 1;
           break;
         default:

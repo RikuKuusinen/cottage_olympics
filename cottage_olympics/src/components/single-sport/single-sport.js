@@ -38,6 +38,7 @@ const SingleSport = (props) => {
     if (submit) {
       var existingScore = scores.find((s) => s.UserId === user.UserId);
       console.log(existingScore);
+      console.log("sport", sport);
       var upsertObject = {};
       if (existingScore) {
         var updatedScore = {
