@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import FloatingActionButtonSize from "../floating-button";
-import AddPicture from "./add-picture";
 import imageService from "../../services/imageService";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 const Pictures = () => {
   const classes = useStyles();
   const [openAdd, setOpenAdd] = useState(false);
-  const [picture, setPicture] = useState({});
   const [gallery, setGallery] = useState([]);
   const [image, setImage] = useState({});
   let myInput = {};
@@ -50,12 +48,6 @@ const Pictures = () => {
 
   const openAddPicture = (event) => {
     setOpenAdd(true);
-  };
-
-  const handleSubmit = async (submit) => {
-    setOpenAdd(false);
-    if (submit) {
-    }
   };
 
   const handleClick = () => {

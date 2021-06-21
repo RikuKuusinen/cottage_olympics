@@ -5,6 +5,7 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import SportsTennis from "@material-ui/icons/SportsTennis";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import Equalizer from "@material-ui/icons/Equalizer";
+import Home from "@material-ui/icons/Home";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -43,6 +44,13 @@ export default function SimpleBottomNavigation() {
         component={Link}
         to="/home"
         className={classes.test}
+        label="Etusivu"
+        icon={<Home />}
+      ></BottomNav>
+      <BottomNav
+        component={Link}
+        to="/sports"
+        className={classes.test}
         label="Lajit"
         icon={<SportsTennis />}
       ></BottomNav>
@@ -58,7 +66,7 @@ export default function SimpleBottomNavigation() {
         component={Link}
         to="/pictures"
         className={classes.test}
-        label="Kuvat?"
+        label="Kuvat"
         icon={<FavoriteIcon />}
       />
     </BottomNavigation>

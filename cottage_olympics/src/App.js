@@ -17,6 +17,7 @@ import { ThemeProvider } from "styled-components";
 import { MuiThemeProvider } from "material-ui/styles";
 import users from "./services/usersService";
 import SingleSport from "./components/single-sport/single-sport";
+import Dashboard from "./components/Dashboard/dashboard";
 
 const styles = {
   paperContainer: {
@@ -135,8 +136,11 @@ const App = () => {
                   <Route path="/sport/:id">
                     <SingleSport user={user} />
                   </Route>
-                  <Route path="/">
+                  <Route path="/sports">
                     <SportsList />
+                  </Route>
+                  <Route path="/">
+                    <Dashboard />
                   </Route>
                 </Switch>
               </Box>
